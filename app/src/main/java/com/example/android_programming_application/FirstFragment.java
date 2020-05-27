@@ -10,12 +10,34 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class FirstFragment extends Fragment {
+<<<<<<< Updated upstream
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+=======
+    private ListView listView;
+    private int page = 1;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        listView = view.findViewById(R.id.listView);
+        MovieRepository.getInstance().getMovies(page, CatagoryEnum.POPULAR, new OnGetMoviesCallback() {
+            @Override
+            public void onSuccess(int page, List<Movie> movies) {
+                MovieAdaptor movieAdaptor = new MovieAdaptor(movies);
+                listView.setAdapter(movieAdaptor);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+>>>>>>> Stashed changes
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
@@ -29,6 +51,12 @@ public class FirstFragment extends Fragment {
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
+<<<<<<< Updated upstream
         });
     }
+=======
+        });*/
+    }
+
+>>>>>>> Stashed changes
 }
