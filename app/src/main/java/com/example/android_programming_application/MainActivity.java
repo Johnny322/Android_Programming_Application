@@ -1,6 +1,5 @@
 package com.example.android_programming_application;
 
-import android.graphics.Movie;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
        FloatingActionButton fab = findViewById(R.id.fab);
@@ -37,19 +36,23 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 MovieRepository.getInstance().getMovies(1, CatagoryEnum.TOP_RATED, new OnGetMoviesCallback() {
+
                     @Override
                     public void onSuccess(int page, List<Movie> movies) {
+
                         for (Movie movie: movies) {
-                            Log.d("Movie title: ", movie.getTitle());
+                                Log.d("Movie title: ", movie.getTitle());
                         }
+
                     }
+
                     @Override
                     public void onError() {
-                        Log.d("Error", "Something went wrong");
+                        
                     }
                 });
             }
-        });*/
+        });
     }
 
     @Override
