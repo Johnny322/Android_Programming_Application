@@ -9,17 +9,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class MovieAdaptor extends BaseAdapter {
     private int amount;
-    private List<String> titles;
-    private List<String> information;
+    private List<Movie> movies;
+    private String URL = "https://image.tmdb.org/t/p/original";
 
-    public MovieAdaptor(int amount, List<String> titles, List<String> information) {
-        this.amount = amount;
-        this.titles = titles;
-        this.information = information;
+    public MovieAdaptor(List<Movie> movies) {
+        this.movies = movies;
+        amount = movies.size();
     }
 
     @Override
@@ -45,9 +46,10 @@ public class MovieAdaptor extends BaseAdapter {
         ImageView imageView = view.findViewById(R.id.imageView);
         TextView titleView = view.findViewById(R.id.textViewTitle);
         TextView infoView = view.findViewById(R.id.textViewInfo);
+        Picasso.get().load(URL+movies.get(position).getBackdrop()).resize(100, 100).into(imageView);
 
-        titleView.setText(titles.get(position));
-        infoView.setText(information.get(position));
+        titleView.setText(movies.get(position).getTitle());
+        infoView.setText("Release date: " + movies.get(position).getReleaseDate());
 
         return view;
     }
