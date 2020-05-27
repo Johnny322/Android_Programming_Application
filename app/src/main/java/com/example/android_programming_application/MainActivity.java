@@ -10,16 +10,22 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.sql.SQLOutput;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -30,15 +36,19 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 MovieRepository.getInstance().getMovies(1, CatagoryEnum.TOP_RATED, new OnGetMoviesCallback() {
+
                     @Override
                     public void onSuccess(int page, List<Movie> movies) {
+
                         for (Movie movie: movies) {
-                            Log.d("Movie title: ", movie.getTitle());
+                                Log.d("Movie title: ", movie.getTitle());
                         }
+
                     }
+
                     @Override
                     public void onError() {
-                        Log.d("Error", "Something went wrong");
+                        
                     }
                 });
             }
@@ -66,4 +76,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
