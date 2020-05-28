@@ -1,4 +1,9 @@
 <resources>
+    <string-array name="categories">
+        <item>Popularity</item>
+        <item>Rating</item>
+        <item>Release Date</item>
+    </string-array>
     <string name="app_name">Android_Programming_Application</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->

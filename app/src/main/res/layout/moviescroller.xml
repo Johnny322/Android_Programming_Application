@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".MovieListFragment">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@mipmap/ic_launcher"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -23,7 +22,6 @@
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="Name"
         android:gravity="center"
         android:layout_toEndOf="@+id/imageView"
         android:layout_toRightOf="@+id/imageView"
@@ -37,7 +35,6 @@
         android:layout_marginLeft="22dp" />
 
     <TextView
-        android:text="Info"
         android:gravity="center"
         android:id="@+id/textViewInfo"
         android:layout_width="match_parent"
