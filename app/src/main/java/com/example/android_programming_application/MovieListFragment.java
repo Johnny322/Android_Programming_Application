@@ -26,7 +26,24 @@ public class MovieListFragment extends Fragment {
         View view = inflater.inflate(R.layout.movie_list_fragment, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int totalItemCount = linearLayoutManager.getItemCount();
+                int visibleItemCount = linearLayoutManager.getChildCount();
+                int firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                        page = page + 1;
+                        setMovieList(page);
+                }
+            }
+        });
+
+
         Bundle arguments = getArguments();
         if(arguments != null) {
             categorySelected = (CatagoryEnum) arguments.get("category");
@@ -38,7 +55,7 @@ public class MovieListFragment extends Fragment {
         return view;
     }
 
-    private void setMovieList() {
+    private void setMovieList(int page) {
         MovieRepository.getInstance().getMovies(page, categorySelected, new OnGetMoviesCallback() {
             @Override
             public void onSuccess(int page, List<Movie> movies) {
@@ -87,7 +104,7 @@ public class MovieListFragment extends Fragment {
                         categorySelected = CatagoryEnum.POPULAR;
                         break;
                 }
-                setMovieList();
+                setMovieList(page);
             }
 
             @Override
