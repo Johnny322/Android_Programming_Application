@@ -1,25 +1,21 @@
 package com.example.android_programming_application;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class FirstFragment extends Fragment {
+public class MovieListFragment extends Fragment {
     private RecyclerView recyclerView;
     private int page = 1;
     private MovieAdaptor movieAdaptor;
@@ -27,19 +23,17 @@ public class FirstFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
-        Bundle arguments = getArguments();
-        if(arguments != null) {
-            Log.d("Click", "Arguments was not null ");
-            categorySelected = (CatagoryEnum) arguments.get("category");
-        } else {
-            categorySelected = CatagoryEnum.POPULAR;
-        }
+        View view = inflater.inflate(R.layout.movie_list_fragment, container, false);
+
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            categorySelected = (CatagoryEnum) arguments.get("category");
+        } else {
+            categorySelected = CatagoryEnum.TOP_RATED;
+        }
         initializeSpinner(view);
-
-        setMovieList();
 
         return view;
     }
@@ -68,6 +62,17 @@ public class FirstFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        switch (categorySelected) {
+            case POPULAR:
+                spinner.setSelection(adapter.getPosition("Popularity"));
+                break;
+            case UPCOMING:
+                spinner.setSelection(adapter.getPosition("Release Date"));
+                break;
+            default:
+                spinner.setSelection(adapter.getPosition("Rating"));
+                break;
+        }
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {

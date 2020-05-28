@@ -36,37 +36,50 @@
 
     <TextView
         android:id="@+id/textViewYear"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_toRightOf="@+id/imageView"
         android:layout_alignTop="@+id/imageView"
-        android:layout_marginTop="22dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/imageView"
         android:autoSizeMaxTextSize="100sp"
         android:autoSizeMinTextSize="12sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
-        android:gravity="center"
         android:text="Year"
-        android:textStyle="bold"
-        android:layout_marginLeft="22dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewGenre"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textViewYear"
-        android:layout_alignRight="@id/textViewYear"
+        android:layout_alignLeft="@id/textViewYear"
         android:layout_marginTop="22dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginRight="-89dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="Genre"
+        android:maxLines="5"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewRating"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textViewGenre"
+        android:layout_alignLeft="@id/textViewGenre"
+        android:layout_marginTop="22dp"
         android:autoSizeMaxTextSize="100sp"
         android:autoSizeMinTextSize="12sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="Genre"
-        android:textStyle="bold"
-        android:layout_marginLeft="22dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewDescription"

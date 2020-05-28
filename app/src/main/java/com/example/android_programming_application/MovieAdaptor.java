@@ -22,7 +22,6 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MovieViewHol
     private List<Movie> movies;
     private String URL = "https://image.tmdb.org/t/p/original";
     private CatagoryEnum adapterCategory;
-    //private final View.OnClickListener mOnClickListener = new MyOnClickListener();
 
     public MovieAdaptor(List<Movie> movies, CatagoryEnum catagoryEnum) {
         this.movies = movies;
@@ -67,7 +66,7 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MovieViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SecondFragment fragment = new SecondFragment();
+                    MovieFragment fragment = new MovieFragment();
 
                     Bundle movieArgument = new Bundle();
                     movieArgument.putInt("secondFragment" , movie.getId());
@@ -80,24 +79,5 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MovieViewHol
                 }
             });
         }
-
-
     }
-
-    /*@Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.moviescroller, null);
-        ImageView imageView = view.findViewById(R.id.imageView);
-        TextView titleView = view.findViewById(R.id.textViewTitle);
-        TextView infoView = view.findViewById(R.id.textViewInfo);
-        Picasso.get().load(URL+movies.get(position).getBackdrop()).resize(100, 100).into(imageView);
-
-        titleView.setText(movies.get(position).getTitle());
-        infoView.setText("Release date: " + movies.get(position).getReleaseDate());
-
-        return view;
-    }*/
-
-
 }

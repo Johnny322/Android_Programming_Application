@@ -1,7 +1,6 @@
 package com.example.android_programming_application;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-public class SecondFragment extends Fragment {
+public class MovieFragment extends Fragment {
 
     private MovieRepository movieRepository;
     private String URL = "https://image.tmdb.org/t/p/original";
@@ -27,6 +22,7 @@ public class SecondFragment extends Fragment {
     private TextView mReleaseView;
     private TextView mGenreView;
     private TextView mDescriptionView;
+    private TextView mRatingView;
     private int movieId;
     private CatagoryEnum category;
 
@@ -35,18 +31,18 @@ public class SecondFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        View view = inflater.inflate(R.layout.fragment_second, container, false);
+        View view = inflater.inflate(R.layout.movie_fragment, container, false);
         Bundle arguments = getArguments();
         movieId = arguments.getInt("secondFragment");
         category = (CatagoryEnum) arguments.get("category");
 
         movieRepository = MovieRepository.getInstance();
-        //Log.d("Click", movieNumber + " is movieNumber");
         setMovieView(movieId);
         mImageView = view.findViewById(R.id.imageView);
         mTitleView = view.findViewById(R.id.textViewTitle);
         mReleaseView = view.findViewById(R.id.textViewYear);
         mGenreView = view.findViewById(R.id.textViewGenre);
+        mRatingView = view.findViewById(R.id.textViewRating);
         mDescriptionView = view.findViewById(R.id.textViewDescription);
 
         Button returnButton = view.findViewById(R.id.button_second);
@@ -54,20 +50,19 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                FirstFragment firstFragment = new FirstFragment();
+                MovieListFragment movieListFragment = new MovieListFragment();
                 Bundle categoryArgument = new Bundle();
                 categoryArgument.putSerializable("category", category);
-                firstFragment.setArguments(categoryArgument);
+                movieListFragment.setArguments(categoryArgument);
 
-                ft.replace(R.id.fragment_container, firstFragment);
+                ft.replace(R.id.fragment_container, movieListFragment);
                 ft.commit();
             }
         });
-        // Inflate the layout for this fragment
         return view;
     }
 
-    private void setMovieView(int movieId) {
+    private void setMovieView(final int movieId) {
         movieRepository.getMovie(movieId, new OnGetMovieCallback() {
             @Override
             public void onSuccess(Movie movie) {
@@ -84,13 +79,13 @@ public class SecondFragment extends Fragment {
                 genres = genres.replaceAll(", $", "");
                 mGenreView.setText(genres);
 
-                mDescriptionView.setText(movie.getOverview());
+                mRatingView.setText("Rating: " + movie.getRating() + " / 10");
 
+                mDescriptionView.setText(movie.getOverview());
             }
 
             @Override
             public void onError() {
-                // getActivity().finish();
             }
         });
     }

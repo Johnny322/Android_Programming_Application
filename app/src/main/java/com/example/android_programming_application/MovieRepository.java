@@ -82,34 +82,6 @@ public class MovieRepository {
     }
 
     /*
-    Method which queues to genre/movie/list api to get the list of genres.
-    Has a callback method which cam be used to define what to do with the list of genres when invoked
-     */
-    public void getGenres(final OnGetGenresCallback callback) {
-        api.getGenres(API_KEY, LANGUAGE)
-                .enqueue(new Callback<GenreResults>() {
-                    @Override
-                    public void onResponse(Call<GenreResults> call, Response<GenreResults> response) {
-                        if (response.isSuccessful()) {
-                            GenreResults genreResults = response.body();
-                            if (genreResults != null && genreResults.getGenres() != null) {
-                                callback.onSuccess(genreResults.getGenres());
-                            } else {
-                                callback.onError();
-                            }
-                        } else {
-                            callback.onError();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<GenreResults> call, Throwable t) {
-                        callback.onError();
-                    }
-                });
-    }
-
-    /*
     Method which queues to movie/{movieId] api to get information about the specific movie id.
     Has a callback method which cam be used to define what to do with the movie information when invoked
      */
